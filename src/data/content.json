@@ -1,0 +1,139 @@
+{
+  "hero": {
+    "badge": "Głęboko regenerująca sesja relaksacyjna",
+    "title": "Ocean Spokoju",
+    "subtitle": "Zabieg pielęgnacyjny dla duszy",
+    "description": "Poczuj harmonię i wewnętrzny spokój w zaledwie",
+    "descriptionHighlight": "2 godziny",
+    "ctaPrimary": "Zarezerwuj Swoje Miejsce",
+    "ctaSecondary": "Poznaj Korzyści",
+    "badges": [
+      { "text": "2 h sesji" },
+      { "text": "Max 7 osób" },
+      { "text": "Od 150 zł" }
+    ]
+  },
+  "benefits": {
+    "title": "Korzyści dla Ciebie",
+    "subtitle": "Odkryj transformacyjną moc spokoju i wewnętrznej harmonii",
+    "items": [
+      {
+        "title": "Wewnętrzna Równowaga",
+        "description": "Odnajdź spokój i harmonię, które płyną z głębi Twojego jestestwa."
+      },
+      {
+        "title": "Uwolnienie Obciążeń",
+        "description": "Pozbądź się mentalnych i emocjonalnych ciężarów, które Cię ograniczają."
+      },
+      {
+        "title": "Lekkość i Ulga",
+        "description": "Poczuj fizyczną i duchową lekkość po uwolnieniu nagromadzonego stresu."
+      },
+      {
+        "title": "Przepływ Energii",
+        "description": "Odblokuj naturalny przepływ życiowej energii i poczuj nową witalność."
+      }
+    ]
+  },
+  "program": {
+    "title": "Program Warsztatów",
+    "subtitle": "Starannie wyselekcjonowane techniki dla Twojego wewnętrznego spokoju",
+    "items": [
+      {
+        "title": "Oddech",
+        "description": "Łagodne praktyki świadomego oddychania dla głębokiej relaksacji i ugruntowania."
+      },
+      {
+        "title": "Praca z Polami Energii",
+        "description": "Praktyczne techniki pozwalające na harmonizację Twojej energii."
+      },
+      {
+        "title": "Kąpiel w Dźwiękach",
+        "description": "Zanurzenie w uzdrawiających wibracjach mis tybetańskich i gongów."
+      },
+      {
+        "title": "Masaż Dźwiękiem",
+        "description": "Doświadczenie wibracji bezpośrednio na ciele dla pełnego odprężenia."
+      }
+    ],
+    "details": [
+      {
+        "label": "Czas trwania",
+        "value": "2 godziny"
+      },
+      {
+        "label": "Wielkość grupy",
+        "value": "Max 7 osób",
+        "sublabel": "Intymna atmosfera"
+      },
+      {
+        "label": "Inwestycja",
+        "value": "od 150 zł",
+        "sublabel": "za osobę"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Co mówią uczestniczki",
+    "subtitle": "Autentyczne opinie uczestniczek warsztatów",
+    "items": [
+      {
+        "quote": "Nigdy nie czułam się tak zrelaksowana. Wyszłam odnowiona i pełna energii. Stan ten utrzymywał się jeszcze wiele dni. Stosowanie poznanych tu technik pomogło mi bardzo mocno obniżyć napięcie psychiczne. Polecam każdemu, kto potrzebuje chwili wytchnienia od codziennego zgiełku.",
+        "author": "Anna K.",
+        "location": "Czeladź",
+        "rating": 5
+      },
+      {
+        "quote": "Bardzo dziękuję za te warsztaty. To było niesamowite przeżycie. Czułam się niesamowicie wypoczęta. Po sesji miała takie uczucie lekkości w głowie. Tak jakby ktoś mi tam przewietrzył. Taka miła jasność myślenia i spokój. ",
+        "author": "Maria P.",
+        "location": "Katowice",
+        "rating": 5
+      },
+      {
+        "quote": "Uczestniczę od roku raz na dwa tygodnie. Mogłabym opowiadać wiele jak dobrze te zajęcia wpłynęły na moje życie, ale może mi tutaj zabraknąć miejsca więc tak w skrócie, to jestem osobą ze zdiagnozowanymi nerwicami, a podczas tych zajęć czuję wielki spokój. Nauczyłam się tu wielu technik, które stosuję samodzielnie na co dzień, ale takie doładowanie spokoje raz na dwa tygodnie działa. bardzo terapeutycznie.",
+        "author": "Joanna W.",
+        "location": "Katowice",
+        "rating": 5
+      }
+    ]
+  },
+  "calendar": {
+    "title": "Wybierz swój termin",
+    "subtitle": "Dostępne lokalizacje i najbliższe daty warsztatów",
+    "infoNote": "Po wybraniu terminu przewiń w dół, aby wypełnić formularz rezerwacji",
+    "locations": {
+      "Katowice": ["2025-12-13"],
+      "Kraków": ["2025-11-22", "2025-12-20"],
+      "Racibórz": ["2025-11-15", "2026-01-10"],
+      "Warszawa": ["2025-12-27", "2026-01-17"],
+      "Poznań": ["2025-11-18", "2025-12-06"]
+    }
+  },
+  "contact": {
+    "title": "Zarezerwuj lub Zapytaj",
+    "subtitle": "Wypełnij formularz poniżej, aby się z nami skontaktować",
+    "fields": {
+      "name": "Imię",
+      "email": "Email",
+      "term": "Wybrany Termin",
+      "message": "Wiadomość / Pytanie"
+    },
+    "placeholders": {
+      "name": "Twoje imię",
+      "email": "twoj@email.pl",
+      "message": "Napisz swoją wiadomość lub pytanie..."
+    },
+    "submitButton": "Wyślij Wiadomość"
+  },
+  "footer": {
+    "tagline": "Spa dla duszy. Odkryj harmonię i wewnętrzny spokój.",
+    "copyright": "© 2025 Ocean Spokoju. Wszelkie prawa zastrzeżone.",
+    "cities": ["Katowice", "Kraków", "Racibórz", "Warszawa", "Poznań"],
+    "links": [
+      { "text": "Korzyści", "href": "#benefits" },
+      { "text": "Program", "href": "#program" },
+      { "text": "Opinie", "href": "#testimonials" },
+      { "text": "Terminy", "href": "#calendar" }
+    ]
+  }
+}
