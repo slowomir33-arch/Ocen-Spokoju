@@ -12,6 +12,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
   const [contactReason, setContactReason] = useState<'reservation' | 'other' | ''>(selectedTerm ? 'reservation' : '');
   const [selectedCity, setSelectedCity] = useState<string>('');
   const [selectedDate, setSelectedDate] = useState<string>(selectedTerm || '');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   
   // Update form when selectedTerm changes from calendar
   useEffect(() => {
@@ -20,6 +22,37 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
       setSelectedDate(selectedTerm);
     }
   }, [selectedTerm]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({ type: 'success', message: data.message });
+        e.currentTarget.reset();
+        setContactReason('');
+        setSelectedCity('');
+        setSelectedDate('');
+      } else {
+        setSubmitStatus({ type: 'error', message: data.message });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'Wystąpił błąd podczas wysyłania wiadomości.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   
   return (
     <section id="contact" className="py-20 md:py-32 w-full max-w-3xl mx-auto px-4">
@@ -33,8 +66,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
           </p>
         </div>
         
-        <form name="contact" method="POST" data-netlify="true" className="space-y-6">
-          <input type="hidden" name="form-name" value="contact" />
+        <form onSubmit={handleSubmit} className="space-y-6">
           
           <div className="group">
             <label htmlFor="name" className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
@@ -217,17 +249,29 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
               placeholder={contact.placeholders.message}
             ></textarea>
           </div>
+
+          {/* Status messages */}
+          {submitStatus && (
+            <div className={`p-4 rounded-xl ${
+              submitStatus.type === 'success' 
+                ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' 
+                : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'
+            }`}>
+              {submitStatus.message}
+            </div>
+          )}
           
           <div className="text-center pt-6">
             <button 
               type="submit" 
-              className="btn-primary w-full md:w-auto group"
+              disabled={isSubmitting}
+              className="btn-primary w-full md:w-auto group disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="flex items-center justify-center gap-3">
                 <svg className="w-5 h-5 transform transition-all duration-700 ease-out group-hover:rotate-[360deg]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 2 L15 9 L22 10 L17 15 L18 22 L12 18 L6 22 L7 15 L2 10 L9 9 Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor"/>
                 </svg>
-                <span>{contact.submitButton}</span>
+                <span>{isSubmitting ? 'Wysyłanie...' : contact.submitButton}</span>
                 <svg className="w-5 h-5 transform transition-all duration-700 ease-out group-hover:rotate-[360deg]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 2 L15 9 L22 10 L17 15 L18 22 L12 18 L6 22 L7 15 L2 10 L9 9 Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor"/>
                 </svg>
