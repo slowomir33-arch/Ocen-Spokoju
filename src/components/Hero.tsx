@@ -103,10 +103,10 @@ const Hero = () => {
       </div>
       
       {/* Main content on glass panel */}
-      <div className="relative z-10 max-w-5xl mx-auto w-full px-4">
-        <div className="inline-block bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-3xl px-10 py-10 md:px-14 md:py-12 shadow-xl border border-white/30 dark:border-gray-700/30">
+      <div className="relative z-10 max-w-5xl mx-auto w-full px-2 sm:px-4">
+        <div className="inline-block bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-3xl px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-12 shadow-xl border border-white/30 dark:border-gray-700/30">
           <div className="mb-6 inline-block opacity-0 animate-fade-in animation-delay-200 animation-fill-forwards">
-            <div className="px-6 py-2 rounded-full bg-white/40 dark:bg-black/40 backdrop-blur-sm text-sm font-semibold text-brand-purple dark:text-brand-gold-light flex items-center gap-2 shadow-lg">
+            <div className="px-4 sm:px-6 py-2 rounded-full bg-white/40 dark:bg-black/40 backdrop-blur-sm text-xs sm:text-sm font-semibold text-brand-purple dark:text-brand-gold-light flex items-center gap-2 shadow-lg">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2 L15 9 L22 10 L17 15 L18 22 L12 18 L6 22 L7 15 L2 10 L9 9 Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.5"/>
               </svg>
@@ -114,17 +114,17 @@ const Hero = () => {
             </div>
           </div>
           
-          <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold mb-6 font-serif opacity-0 animate-fade-in animation-delay-400 animation-fill-forwards drop-shadow-2xl leading-none whitespace-nowrap">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-6 font-serif opacity-0 animate-fade-in animation-delay-400 animation-fill-forwards drop-shadow-2xl leading-none">
             <span className="gradient-text drop-shadow-lg">
               {hero.title}
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-4 text-gray-800 dark:text-gray-100 leading-relaxed opacity-0 animate-fade-in animation-delay-600 animation-fill-forwards drop-shadow-md">
+          <p className="text-base sm:text-xl md:text-2xl max-w-3xl mx-auto mb-4 text-gray-800 dark:text-gray-100 leading-relaxed opacity-0 animate-fade-in animation-delay-600 animation-fill-forwards drop-shadow-md px-2">
             {hero.subtitle}
           </p>
           
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-12 text-gray-700 dark:text-gray-200 opacity-0 animate-fade-in animation-delay-800 animation-fill-forwards drop-shadow-md">
+          <p className="text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-12 text-gray-700 dark:text-gray-200 opacity-0 animate-fade-in animation-delay-800 animation-fill-forwards drop-shadow-md px-2">
             {hero.description} <span className="font-bold text-brand-gold drop-shadow-sm">{hero.descriptionHighlight}</span>
           </p>
           
@@ -142,9 +142,9 @@ const Hero = () => {
           </div>
           
           {/* Subtle info badges */}
-          <div className="mt-16 flex flex-wrap justify-center gap-6 text-sm opacity-0 animate-fade-in animation-delay-1200 animation-fill-forwards">
+          <div className="mt-8 sm:mt-16 flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm opacity-0 animate-fade-in animation-delay-1200 animation-fill-forwards">
             {hero.badges.map((badge, idx) => (
-              <div key={idx} className="bg-white/50 dark:bg-black/50 backdrop-blur-md px-6 py-3 rounded-full flex items-center gap-2 group hover:scale-105 transition-all duration-300 shadow-lg border border-white/30 dark:border-gray-700/30">
+              <div key={idx} className="bg-white/50 dark:bg-black/50 backdrop-blur-md px-3 sm:px-6 py-2 sm:py-3 rounded-full flex items-center gap-2 group hover:scale-105 transition-all duration-300 shadow-lg border border-white/30 dark:border-gray-700/30">
                 <div className="transform transition-all duration-700 ease-out group-hover:rotate-[360deg]">
                   {idx === 0 && (
                     <svg className="w-5 h-5 text-brand-purple dark:text-brand-gold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
