@@ -67,7 +67,7 @@ const Hero = () => {
   const { hero } = content;
 
   return (
-    <section className="relative text-center py-24 md:py-40 px-4 w-full min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative text-center py-6 md:py-40 px-4 w-full min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Video background with dual crossfade */}
       <div className="absolute inset-0 w-full h-full">
         <video

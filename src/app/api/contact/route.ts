@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     // Send email via Resend
     const { data: emailData, error } = await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+      from: process.env.EMAIL_FROM || 'kontakt@oceanspokoju.studio',
       to: process.env.EMAIL_TO || 'kontakt@oceanspokoju.studio',
       subject: emailSubject,
       html: emailHtml,
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ 
         success: false, 
         message: 'Wystąpił błąd podczas wysyłania wiadomości.' 
-      }, { status: 500 });
+      }, { status: 200 }); // Return 200 to avoid CORS/fetch errors
     }
 
     console.log('Email sent successfully:', emailData);
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ 
       success: true, 
       message: 'Wiadomość wysłana pomyślnie! Odpowiemy najszybciej jak to możliwe.' 
-    });
+    }, { status: 200 });
 
   } catch (error) {
     console.error('Form submission error:', error);

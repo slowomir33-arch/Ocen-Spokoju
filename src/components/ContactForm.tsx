@@ -14,21 +14,36 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
   const [selectedDate, setSelectedDate] = useState<string>(selectedTerm || '');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+  const [showCitySelection, setShowCitySelection] = useState(false);
   
   // Update form when selectedTerm changes from calendar
   useEffect(() => {
     if (selectedTerm) {
       setContactReason('reservation');
       setSelectedDate(selectedTerm);
+      setShowCitySelection(false); // Hide selection when date comes from calendar
     }
   }, [selectedTerm]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Validate reservation fields
+    if (contactReason === 'reservation' && !selectedDate) {
+      setSubmitStatus({ type: 'error', message: 'Proszę wybrać termin wydarzenia.' });
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    // Add selected date to formData if it exists (from calendar or manual selection)
+    if (selectedDate) {
+      formData.set('date', selectedDate);
+    }
 
     try {
       const response = await fetch('/api/contact', {
@@ -40,14 +55,16 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
 
       if (data.success) {
         setSubmitStatus({ type: 'success', message: data.message });
-        e.currentTarget.reset();
+        form.reset();
         setContactReason('');
         setSelectedCity('');
         setSelectedDate('');
+        setShowCitySelection(false);
       } else {
-        setSubmitStatus({ type: 'error', message: data.message });
+        setSubmitStatus({ type: 'error', message: data.message || 'Wystąpił błąd podczas wysyłania wiadomości.' });
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       setSubmitStatus({ type: 'error', message: 'Wystąpił błąd podczas wysyłania wiadomości.' });
     } finally {
       setIsSubmitting(false);
@@ -106,11 +123,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
               <div>
                 <label 
                   onClick={(e) => {
-                    // If already selected and date is chosen, reset to allow re-selection
-                    if (contactReason === 'reservation' && selectedDate) {
+                    // If already selected and date is chosen, allow editing by clicking the text
+                    if (contactReason === 'reservation' && selectedDate && !showCitySelection) {
                       e.preventDefault();
-                      setSelectedCity('');
-                      setSelectedDate('');
+                      setShowCitySelection(true);
                     }
                   }}
                   className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
@@ -125,17 +141,21 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
                     checked={contactReason === 'reservation'}
                     onChange={(e) => {
                       setContactReason('reservation');
+                      // If date already selected from calendar, keep it; otherwise show selection
+                      if (!selectedDate) {
+                        setShowCitySelection(true);
+                      }
                     }}
                     className="w-5 h-5 accent-brand-purple mr-3"
                     required
                   />
                   <span className="text-gray-700 dark:text-gray-300">
-                    {selectedDate ? `Rezerwacji udziału w wydarzeniu ${selectedDate}` : 'Rezerwacji udziału w wydarzeniu'}
+                    {selectedDate && contactReason === 'reservation' ? `Rezerwacji udziału w wydarzeniu ${selectedDate}` : 'Rezerwacji udziału w wydarzeniu'}
                   </span>
                 </label>
 
-                {/* Show cities when reservation selected but no date chosen yet */}
-                {contactReason === 'reservation' && !selectedCity && (
+                {/* Show cities when reservation selected and either no date or user wants to edit */}
+                {contactReason === 'reservation' && showCitySelection && (
                   <div className="mt-3 ml-8 space-y-2">
                     {Object.keys(calendar.locations).map((city) => (
                       <label 
@@ -152,7 +172,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
                             setSelectedDate('');
                           }}
                           className="w-4 h-4 accent-brand-purple mr-2"
-                          required
                         />
                         <svg className="w-4 h-4 mr-2 text-gray-600 dark:text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
@@ -163,8 +182,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
                   </div>
                 )}
 
-                {/* Show dates when city selected but no date chosen yet */}
-                {contactReason === 'reservation' && selectedCity && !selectedDate && (
+                {/* Show dates when city selected */}
+                {contactReason === 'reservation' && selectedCity && showCitySelection && (
                   <div className="mt-3 ml-8 space-y-2">
                     {calendar.locations[selectedCity as keyof typeof calendar.locations].map((date: string) => {
                       const dateObj = new Date(date);
@@ -186,30 +205,16 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
                             name="date" 
                             value={fullValue}
                             checked={selectedDate === fullValue}
-                            onChange={(e) => setSelectedDate(e.target.value)}
+                            onChange={(e) => {
+                              setSelectedDate(e.target.value);
+                              setShowCitySelection(false); // Hide selection after choosing date
+                            }}
                             className="w-4 h-4 accent-brand-purple mr-2"
-                            required
                           />
                           <span className="text-sm text-gray-700 dark:text-gray-300">{formattedDate}</span>
                         </label>
                       );
                     })}
-                  </div>
-                )}
-
-                {/* Show change button when date is selected */}
-                {selectedDate && contactReason === 'reservation' && (
-                  <div className="mt-3 ml-8">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSelectedCity('');
-                        setSelectedDate('');
-                      }}
-                      className="text-sm text-brand-purple dark:text-brand-gold hover:underline font-semibold"
-                    >
-                      Zmień datę
-                    </button>
                   </div>
                 )}
               </div>
@@ -227,8 +232,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
                   checked={contactReason === 'other'}
                   onChange={(e) => {
                     setContactReason('other');
-                    setSelectedCity('');
-                    setSelectedDate('');
+                    setShowCitySelection(false);
                   }}
                   className="w-5 h-5 accent-brand-purple mr-3"
                 />

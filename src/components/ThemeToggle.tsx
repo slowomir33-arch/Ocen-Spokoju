@@ -37,7 +37,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/30 dark:bg-black/30 backdrop-blur-md border border-white/40 dark:border-gray-700/40 shadow-lg hover:scale-110 transition-all duration-300 group"
+      className="hidden md:flex fixed top-6 right-6 z-50 p-3 rounded-full bg-white/30 dark:bg-black/30 backdrop-blur-md border border-white/40 dark:border-gray-700/40 shadow-lg hover:scale-110 transition-all duration-300 group"
       aria-label="Przełącz motyw"
     >
       <div className="relative w-8 h-8">
