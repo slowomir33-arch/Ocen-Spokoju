@@ -1,0 +1,11 @@
+# robots.txt for oceanspokoju.studio
+
+User-agent: *
+Allow: /
+
+# Disallow admin/editor pages
+Disallow: /editor
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://oceanspokoju.studio/sitemap.xml

@@ -155,8 +155,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
                 </label>
 
                 {/* Show cities when reservation selected and either no date or user wants to edit */}
-                {contactReason === 'reservation' && showCitySelection && (
-                  <div className="mt-3 ml-8 space-y-2">
+                {contactReason === 'reservation' && showCitySelection && !selectedCity && (
+                  <div className="mt-3 space-y-2">
                     {Object.keys(calendar.locations).map((city) => (
                       <label 
                         key={city}
@@ -182,9 +182,28 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedTerm }) => {
                   </div>
                 )}
 
+                {/* Show selected city (clickable to change) */}
+                {contactReason === 'reservation' && selectedCity && showCitySelection && (
+                  <div className="mt-3 space-y-2">
+                    <label 
+                      onClick={() => {
+                        setSelectedCity('');
+                        setSelectedDate('');
+                      }}
+                      className="flex items-center p-3 rounded-lg bg-brand-purple/10 dark:bg-brand-gold/10 border-2 border-brand-purple dark:border-brand-gold cursor-pointer transition-all duration-300 hover:bg-brand-purple/20 dark:hover:bg-brand-gold/20"
+                    >
+                      <svg className="w-4 h-4 mr-2 text-brand-purple dark:text-brand-gold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                      </svg>
+                      <span className="text-sm font-semibold text-brand-purple dark:text-brand-gold">{selectedCity}</span>
+                      <span className="ml-auto text-xs text-gray-500 dark:text-gray-400">Kliknij aby zmienić</span>
+                    </label>
+                  </div>
+                )}
+
                 {/* Show dates when city selected */}
                 {contactReason === 'reservation' && selectedCity && showCitySelection && (
-                  <div className="mt-3 ml-8 space-y-2">
+                  <div className="mt-3 space-y-2">
                     {calendar.locations[selectedCity as keyof typeof calendar.locations].map((date: string) => {
                       const dateObj = new Date(date);
                       const formattedDate = dateObj.toLocaleDateString('pl-PL', { 

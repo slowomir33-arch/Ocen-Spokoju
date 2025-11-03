@@ -88,9 +88,9 @@ const IntroReveal: React.FC = () => {
 
       {/* Title on top */}
       <div className={`intro-title relative text-center px-4 sm:px-6 ${phase === "title" ? "intro-title--in" : "intro-title--hold"}`}>
-        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold font-serif leading-none">
+        <div className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold font-serif leading-none">
           <span className="gradient-text drop-shadow-lg">Ocean Spokoju</span>
-        </h1>
+        </div>
       </div>
     </div>
   );

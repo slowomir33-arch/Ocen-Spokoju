@@ -1,8 +1,8 @@
 {
   "hero": {
-    "badge": "Głęboko regenerująca sesja relaksacyjna",
+    "badge": "Kąpiel w Dźwiękach - Warsztaty Mis Tybetańskich",
     "title": "Ocean Spokoju",
-    "subtitle": "Zabieg pielęgnacyjny dla duszy",
+    "subtitle": "Zabieg pielęgnacyjny dla duszy - Głęboka Uzdrawiająca Relaksacja",
     "description": "Poczuj harmonię i wewnętrzny spokój w zaledwie",
     "descriptionHighlight": "2 godziny",
     "ctaPrimary": "Zarezerwuj Swoje Miejsce",
@@ -98,8 +98,8 @@
     ]
   },
   "calendar": {
-    "title": "Wybierz swój termin",
-    "subtitle": "Dostępne lokalizacje i najbliższe daty warsztatów",
+    "title": "Terminy Warsztatów: Katowice, Kraków, Warszawa, Poznań, Racibórz",
+    "subtitle": "Wybierz kąpiel w dźwiękach w Twoim mieście - dostępne najbliższe terminy",
     "infoNote": "Po wybraniu terminu przewiń w dół, aby wypełnić formularz rezerwacji",
     "locations": {
       "Katowice": ["2025-12-13"],
